@@ -3,12 +3,17 @@
 #import <objc/runtime.h>
 #import <IOKit/IOKitLib.h>
 
+#import <SpringBoard/SpringBoard.h>
+#import <SpringBoard/SBApplication.h>
+#import <SpringBoard/SBApplicationController.h>
+
 #ifdef DEBUG
 #define NSLog(...) NSLog(__VA_ARGS__)
 #else 
 #define NSLog(...) (void)0
 #endif
 
+/*
 @interface SpringBoard : UIApplication
 - (void)startObserving;
 - (void)getAndSave;
@@ -16,3 +21,4 @@
 -(int)getAmperage;
 @property int value;
 @end
+*/

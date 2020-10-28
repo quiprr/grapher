@@ -21,7 +21,6 @@ id readPreferenceValue(id key, id fallback)
 
 %hook SpringBoard
 
-%property int value;
 
 - (void)applicationDidFinishLaunching:(id)args
 {
@@ -31,7 +30,6 @@ id readPreferenceValue(id key, id fallback)
     if (enabled)
     {
         NSLog(@"Grapher: is enabled");
-        self.value = 0;
         [self startObserving];
     }
 }
@@ -48,15 +46,31 @@ id readPreferenceValue(id key, id fallback)
 
 - (void)getAndSave
 {
-    self.value = self.value + 1;
+
     float currentTemp = [self getTemperature];
     int currentAmperage = [self getAmperage];
+    NSString *bundleID;
+
+    SpringBoard *app = (SpringBoard *)[UIApplication sharedApplication];
+	SBApplication *frontmostApp = app._accessibilityFrontMostApplication;
+    if (frontmostApp.bundleIdentifier) {
+        bundleID = frontmostApp.bundleIdentifier;
+    } else {
+        bundleID = @"com.apple.springboard";
+    }
 
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/com.charliewhile.grapher.plist"];
-    NSString *key1 = [NSString stringWithFormat:@"temperatureValue%d", self.value];
-    NSString *key2 = [NSString stringWithFormat:@"amperageValue%d", self.value];
-    [dict setObject:@(currentTemp) forKey:key1];
-    [dict setObject:@(currentAmperage) forKey:key2];
+    NSMutableDictionary *log = dict[@"log"] ?: [NSMutableDictionary new];
+    NSMutableArray *appLog = log[@"bundleID"] ?: [NSMutableArray new];
+
+    NSMutableDictionary *logItem = [NSMutableDictionary new];
+    logItem[@"temperature"] = @(currentTemp);
+    logItem[@"amperage"] = @(currentAmperage);
+    [appLog addObject: logItem];
+
+    [log setObject:appLog forKey:bundleID];
+    
+    [dict setObject:log forKey:@"log"];
     [dict writeToFile:@"/var/mobile/Library/Preferences/com.charliewhile.grapher.plist" atomically:YES];
     NSLog(@"Grapher: getAndSave: currentTemp: %f, currentAmperage: %d", currentTemp, currentAmperage);
 
