@@ -1,0 +1,9 @@
+Package: com.charliewhile.grapher
+Name: Grapher
+Depends: mobilesubstrate
+Version: 1.0.0
+Architecture: iphoneos-arm
+Description: A tweak to gather and graph battery usage and temperature data
+Maintainer: quiprr and Charlie While
+Author: quiprr and Charlie While
+Section: Tweaks
