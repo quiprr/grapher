@@ -38,11 +38,8 @@ static void notificationCallback(CFNotificationCenterRef center, void *observer,
 {
 	if ((self = [super init]))
 	{
-        if (enabled)
-        {
-            NSLog(@"Grapher: is enabled");
-            [self startObserving];
-        }
+        NSLog(@"Grapher: is enabled");
+        [self startObserving];
 	}
 	return self;
 }
