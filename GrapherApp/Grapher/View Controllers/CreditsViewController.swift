@@ -29,6 +29,7 @@ class CreditsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         UIApplication.shared.open(URL(string: credits[indexPath.row].socialLinks)!)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
     private let credits = [
