@@ -3,12 +3,12 @@ export TARGET = iphone:clang:13.3:13.0
 # export PREFIX = $(THEOS)/toolchain/Xcode.xctoolchain/usr/bin/
 
 INSTALL_TARGET_PROCESSES = SpringBoard
-DEBUG = 1
-FINALPACKAGE = 0
+DEBUG = 0
+FINALPACKAGE = 1
 PACKAGE_VERSION = $(THEOS_PACKAGE_BASE_VERSION)
 
 include $(THEOS)/makefiles/common.mk
-SUBPROJECTS += src/Grapher GrapherApp
+SUBPROJECTS += src/Grapher src/GrapherPrefs src/GrapherApp
 include $(THEOS_MAKE_PATH)/aggregate.mk
 
 purge::
