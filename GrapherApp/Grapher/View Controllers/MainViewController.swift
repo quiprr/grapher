@@ -64,7 +64,7 @@ class MainViewController: UIViewController {
 
         alert.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { action in
             DataParser.shared.purge(true)
-            self.tableView.reloadData()
+            self.refreshButton()
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 
