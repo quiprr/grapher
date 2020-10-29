@@ -13,12 +13,9 @@
 #define NSLog(...) (void)0
 #endif
 
-/*
-@interface SpringBoard : UIApplication
+@interface GrapherLogger : NSObject
 - (void)startObserving;
 - (void)getAndSave;
 -(float)getTemperature;
 -(int)getAmperage;
-@property int value;
 @end
-*/

@@ -17,32 +17,42 @@ id readPreferenceValue(id key, id fallback)
     return value;
 }
 
-%group SpringBoard
+@implementation GrapherLogger 
 
-%hook SpringBoard
-
-
-- (void)applicationDidFinishLaunching:(id)args
++(void)load
 {
-    %orig;
-    NSLog(@"Grapher: SpringBoard didFinishLaunching and we are go");
-    id enabled = readPreferenceValue(@"enableTweak", @"NO");
-    if (enabled)
-    {
-        NSLog(@"Grapher: is enabled");
-        [self startObserving];
-    }
+	[self sharedInstance];
 }
 
-%new
++(instancetype)sharedInstance
+{
+	static dispatch_once_t onceToken = 0;
+	__strong static GrapherLogger* sharedInstance = nil;
+	dispatch_once(&onceToken, ^{
+		sharedInstance = [[self alloc] init];
+	});
+	return sharedInstance;
+}
+
+-(instancetype)init
+{
+	if ((self = [super init]))
+	{
+        id enabled = readPreferenceValue(@"enableTweak", @"NO");
+        if (enabled)
+        {
+            NSLog(@"Grapher: is enabled");
+            [self startObserving];
+        }
+	}
+	return self;
+}
 
 - (void)startObserving
 {
     NSLog(@"Grapher: startObserving");
     [NSTimer scheduledTimerWithTimeInterval:15.0 target:self selector:@selector(getAndSave) userInfo:nil repeats:YES];
 }
-
-%new
 
 - (void)getAndSave
 {
@@ -61,7 +71,7 @@ id readPreferenceValue(id key, id fallback)
 
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/com.charliewhile.grapher.plist"];
     NSMutableDictionary *log = dict[@"log"] ?: [NSMutableDictionary new];
-    NSMutableArray *appLog = log[@"bundleID"] ?: [NSMutableArray new];
+    NSMutableArray *appLog = log[bundleID] ?: [NSMutableArray new];
 
     NSMutableDictionary *logItem = [NSMutableDictionary new];
     logItem[@"temperature"] = @(currentTemp);
@@ -69,14 +79,11 @@ id readPreferenceValue(id key, id fallback)
     [appLog addObject: logItem];
 
     [log setObject:appLog forKey:bundleID];
-    
     [dict setObject:log forKey:@"log"];
     [dict writeToFile:@"/var/mobile/Library/Preferences/com.charliewhile.grapher.plist" atomically:YES];
     NSLog(@"Grapher: getAndSave: currentTemp: %f, currentAmperage: %d", currentTemp, currentAmperage);
 
 }
-
-%new
 
 -(float)getTemperature
 {
@@ -90,8 +97,6 @@ id readPreferenceValue(id key, id fallback)
     return temperature/100.0f;
 }
 
-%new
-
 -(int)getAmperage
 {
     io_service_t powerSource = IOServiceGetMatchingService(kIOMasterPortDefault, IOServiceMatching("IOPMPowerSource"));
@@ -104,17 +109,5 @@ id readPreferenceValue(id key, id fallback)
     return amperage;
 }
 
-%end
+@end
 
-%end
-
-%ctor
-{
-    NSLog(@"Grapher: constructor");
-    if([NSBundle.mainBundle.bundleIdentifier isEqualToString:@"com.apple.springboard"])
-    {
-        NSLog(@"Grapher: Injected into SpringBoard, initializing SpringBoard hooks...");
-        %init(SpringBoard)
-        NSLog(@"Grapher: Done initializing SpringBoard hooks!");
-    }
-}

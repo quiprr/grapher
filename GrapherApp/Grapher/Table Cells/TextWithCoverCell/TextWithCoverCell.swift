@@ -9,15 +9,19 @@ import UIKit
 
 class TextWithCoverCell: UITableViewCell {
 
+    @IBOutlet weak var label: UILabel!
+    
+    @IBInspectable weak var minHeight: NSNumber! = 50
+        
+    override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
+        let size = super.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: horizontalFittingPriority, verticalFittingPriority: verticalFittingPriority)
+        guard let minHeight = minHeight else { return size }
+        return CGSize(width: size.width, height: max(size.height, (minHeight as! CGFloat)))
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
+        self.label.adjustsFontSizeToFitWidth = true
+    }    
 }

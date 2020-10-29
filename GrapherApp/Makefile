@@ -9,7 +9,7 @@ include $(THEOS)/makefiles/common.mk
 XCODEPROJ_NAME = Grapher
 
 Grapher_XCODE_SCHEME = Grapher
-Grapher_CODESIGN_FLAGS = -SexampleAppEntitlements.xml
+Grapher_CODESIGN_FLAGS = -SgrapherEntitlements.xml
 
 include $(THEOS_MAKE_PATH)/xcodeproj.mk
 

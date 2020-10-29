@@ -1,9 +1,9 @@
 # Acknowledgements
 This application makes use of the following third party libraries:
 
-## SwiftCharts
+## Charts
 
-                                 Apache License
+Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
 
@@ -191,7 +191,7 @@ This application makes use of the following third party libraries:
       same "printed page" as the copyright notice for easier
       identification within third-party archives.
 
-   Copyright 2015 Ivan Schütz
+   Copyright 2016-2019 Daniel Cohen Gindi & Philipp Jahoda
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.

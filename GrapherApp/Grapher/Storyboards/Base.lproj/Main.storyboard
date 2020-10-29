@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Per-iF-J2U">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -32,27 +31,93 @@
                             <constraint firstItem="pA9-SP-StP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="rtv-IH-2XP"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Grapher" id="gUL-AP-dEE">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="eFi-ty-deM">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="VJH-RU-lfi">
-                                <rect key="frame" x="332" y="5" width="62" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Refresh">
-                                    <color key="titleColor" name="AccentColor"/>
-                                </state>
-                            </button>
-                            <connections>
-                                <action selector="refreshButton:" destination="BYZ-38-t0r" id="AOc-Tt-crf"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Grapher" id="gUL-AP-dEE"/>
                     <connections>
                         <outlet property="tableView" destination="pA9-SP-StP" id="8NC-a1-bvv"/>
+                        <segue destination="ETf-e5-3qX" kind="show" identifier="Grapher.ShowDetail" id="kET-mw-g1Q"/>
+                        <segue destination="1Ch-ih-s4L" kind="show" identifier="Grapher.ShowCredits" id="57d-fT-ywW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1042.0289855072465" y="116.51785714285714"/>
+        </scene>
+        <!--Data View Controller-->
+        <scene sceneID="uQ1-oi-rj2">
+            <objects>
+                <viewController id="ETf-e5-3qX" customClass="DataViewController" customModule="Grapher" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PYs-fo-oY5">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aCS-cJ-j7J" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="15" y="490" width="384" height="357"/>
+                                <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" notEnabled="YES"/>
+                                </accessibility>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tud-Nd-Cpw" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="15" y="103" width="384" height="357"/>
+                                <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" notEnabled="YES"/>
+                                </accessibility>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ozg-gL-Zqe"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ozg-gL-Zqe" firstAttribute="trailing" secondItem="tud-Nd-Cpw" secondAttribute="trailing" constant="15" id="3eD-u7-bvC"/>
+                            <constraint firstItem="aCS-cJ-j7J" firstAttribute="top" secondItem="ozg-gL-Zqe" secondAttribute="centerY" constant="15" id="5Kj-5n-KMc"/>
+                            <constraint firstItem="ozg-gL-Zqe" firstAttribute="centerY" secondItem="tud-Nd-Cpw" secondAttribute="bottom" constant="15" id="NwP-zm-Jik"/>
+                            <constraint firstItem="tud-Nd-Cpw" firstAttribute="leading" secondItem="ozg-gL-Zqe" secondAttribute="leading" constant="15" id="ZeV-eS-R6z"/>
+                            <constraint firstItem="ozg-gL-Zqe" firstAttribute="trailing" secondItem="aCS-cJ-j7J" secondAttribute="trailing" constant="15" id="bsR-tC-5Xe"/>
+                            <constraint firstItem="aCS-cJ-j7J" firstAttribute="leading" secondItem="ozg-gL-Zqe" secondAttribute="leading" constant="15" id="mMh-4N-t0t"/>
+                            <constraint firstItem="tud-Nd-Cpw" firstAttribute="top" secondItem="ozg-gL-Zqe" secondAttribute="top" constant="15" id="osn-vY-uCv"/>
+                            <constraint firstItem="ozg-gL-Zqe" firstAttribute="bottom" secondItem="aCS-cJ-j7J" secondAttribute="bottom" constant="15" id="rek-uM-UIj"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="aic-57-l3V"/>
+                    <connections>
+                        <outlet property="dischargeView" destination="aCS-cJ-j7J" id="5aU-gj-g2U"/>
+                        <outlet property="temperatureView" destination="tud-Nd-Cpw" id="Yv9-NR-PGV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GAT-mT-zRV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1769.5652173913045" y="130.58035714285714"/>
+        </scene>
+        <!--Credits View Controller-->
+        <scene sceneID="iqw-Dk-4AD">
+            <objects>
+                <viewController id="1Ch-ih-s4L" customClass="CreditsViewController" customModule="Grapher" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qbX-xL-euV">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BB8-yb-54o">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Zlq-88-1h4"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="BB8-yb-54o" firstAttribute="leading" secondItem="Zlq-88-1h4" secondAttribute="leading" id="CD3-Hs-Utb"/>
+                            <constraint firstItem="Zlq-88-1h4" firstAttribute="bottom" secondItem="BB8-yb-54o" secondAttribute="bottom" id="QuR-SM-Aq7"/>
+                            <constraint firstItem="Zlq-88-1h4" firstAttribute="trailing" secondItem="BB8-yb-54o" secondAttribute="trailing" id="RIm-mw-r29"/>
+                            <constraint firstItem="BB8-yb-54o" firstAttribute="top" secondItem="Zlq-88-1h4" secondAttribute="top" id="Wag-gy-2vu"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="ypG-IZ-VyW"/>
+                    <connections>
+                        <outlet property="tableView" destination="BB8-yb-54o" id="V4m-iZ-VYo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P7i-e7-Kbb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1919" y="870"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jaw-1B-IL1">
@@ -74,11 +139,11 @@
         </scene>
     </scenes>
     <resources>
-        <namedColor name="AccentColor">
-            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

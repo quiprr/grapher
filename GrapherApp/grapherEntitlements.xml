@@ -8,5 +8,9 @@
         <true/>
         <key>com.apple.private.skip-library-validation</key>
         <true/>
+	<key>com.apple.security.exception.files.home-relative-path.read-write</key>
+	<array>
+		<string>/Library/Preferences/com.charliewhile.grapher.plist</string>
+	</array>
     </dict>
 </plist>
