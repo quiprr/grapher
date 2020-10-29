@@ -10,6 +10,14 @@
 
 @implementation GrapherLogger 
 static BOOL enabled;
+static NSString *nsNotificationString = @"com.charliewhile.grapher/prefs.changed";
+static NSString *nsDomainString = @"com.charliewhile.grapher";
+
+static void notificationCallback(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo)
+{
+    NSNumber *e = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"enabled" inDomain:nsDomainString];
+    enabled = (e)? [e boolValue]:YES;
+}
 
 +(void)load
 {
@@ -30,8 +38,6 @@ static BOOL enabled;
 {
 	if ((self = [super init]))
 	{
-        NSNumber *e = (NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"enabled" inDomain:@"com.charliewhile.grapher"];
-        enabled = (e)? [e boolValue]:YES;
         if (enabled)
         {
             NSLog(@"Grapher: is enabled");
@@ -105,3 +111,8 @@ static BOOL enabled;
 
 @end
 
+%ctor
+{
+    notificationCallback(NULL, NULL, NULL, NULL, NULL);
+    CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, notificationCallback, (CFStringRef)nsNotificationString, NULL, CFNotificationSuspensionBehaviorCoalesce);
+}
