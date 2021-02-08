@@ -2,12 +2,12 @@
 //  AppDelegate.swift
 //  Grapher
 //
-//  Created by Charlie While on 28/10/2020.
+//  Created by Amy While on 28/10/2020.
 //
 
 import UIKit
 
-@main
+@UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 

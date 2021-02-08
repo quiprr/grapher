@@ -1,8 +1,8 @@
-//
+	//
 //  CreditsViewController.swift
 //  Grapher
 //
-//  Created by Charlie While on 29/10/2020.
+//  Created by Amy While on 29/10/2020.
 //
 
 import UIKit
@@ -33,7 +33,7 @@ class CreditsViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     private let credits = [
-        Credit(creditNames: "Charlie While", reason: "App Developer", socialLinks: "https://twitter.com/elihweilrahc13"),
+        Credit(creditNames: "Amy While", reason: "App Developer", socialLinks: "https://twitter.com/elihweilrahc13"),
         Credit(creditNames: "quiprr", reason: "Tweak Developer", socialLinks: "https://twitter.com/quiprr"),
         Credit(creditNames: "Charts", reason: "Graph Library", socialLinks: "https://github.com/danielgindi/Charts")
     ]
