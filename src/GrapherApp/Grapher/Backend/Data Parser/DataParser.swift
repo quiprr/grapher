@@ -2,7 +2,7 @@
 //  DataParser.swift
 //  Grapher
 //
-//  Created by Charlie While on 28/10/2020.
+//  Created by Amy While on 28/10/2020.
 //
 
 import Foundation
@@ -38,3 +38,11 @@ class DataParser {
         self.getEntriesFromLog()
     }
 }
+
+public func appName(_ s: String) -> String {
+    if let index = String(s.reversed()).range(of: ".")?.lowerBound { return String(String(String(s.reversed())[..<index]).reversed()) } else { return "Error" }
+}
+
+var exampleReturn: String {
+    "test"
+}	

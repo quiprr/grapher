@@ -12,6 +12,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var shownKeys = [String]()
+    var heartBeat: Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +43,8 @@ class MainViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = rightItem
         self.navigationItem.leftBarButtonItem = leftItem
         
+        self.heartBeat = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(refreshButton), userInfo: nil, repeats: true)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(refreshButton), name: .FuckyWucky, object: nil)
     }
     
@@ -52,6 +55,8 @@ class MainViewController: UIViewController {
         for key in DataParser.shared.data.keys {
             self.shownKeys.append(key)
         }
+        
+        self.shownKeys = self.shownKeys.sorted()
     }
     
     @objc func refreshButton() {
@@ -77,7 +82,7 @@ class MainViewController: UIViewController {
                     let controller = segue.destination as! DataViewController
                     let data = DataParser.shared.data[self.shownKeys[indexPath.row]]
                     controller.data = data
-                    controller.navTitle = self.shownKeys[indexPath.row]
+                    controller.navTitle = appName(self.shownKeys[indexPath.row])
                 }
             }
         }
@@ -110,7 +115,7 @@ extension MainViewController : UITableViewDataSource {
             cell.label.text = "Credits"
             return cell
         } else {
-            cell.label.text = self.shownKeys[indexPath.row]
+            cell.label.text = appName(self.shownKeys[indexPath.row])
             return cell
         }
     }

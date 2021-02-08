@@ -77,8 +77,7 @@ static void notificationCallback(CFNotificationCenterRef center, void *observer,
 
         [log setObject:appLog forKey:bundleID];
         [dict setObject:log forKey:@"log"];
-        [dict writeToFile:@"/var/mobile/Library/Preferences/com.charliewhile.grapher.plist" atomically:YES];
-        NSLog(@"Grapher: getAndSave: currentTemp: %f, currentAmperage: %d", currentTemp, currentAmperage);
+        [dict writeToFile:@"/var/mobile/Library/Preferences/com.charliewhile.grapher.plist" atomically:YES];	
     }
 }
 
