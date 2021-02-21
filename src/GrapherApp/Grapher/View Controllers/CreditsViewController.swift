@@ -33,7 +33,7 @@ class CreditsViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     private let credits = [
-        Credit(creditNames: "Amy While", reason: "App Developer", socialLinks: "https://twitter.com/elihweilrahc13"),
+        Credit(creditNames: "Amy While", reason: "App Developer", socialLinks: "https://twitter.com/elihwyma"),
         Credit(creditNames: "quiprr", reason: "Tweak Developer", socialLinks: "https://twitter.com/quiprr"),
         Credit(creditNames: "Charts", reason: "Graph Library", socialLinks: "https://github.com/danielgindi/Charts")
     ]
